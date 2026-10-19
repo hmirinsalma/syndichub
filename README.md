@@ -133,7 +133,7 @@ Ce projet est sous licence [MIT](LICENSE).
 **Salma**  
 Étudiante en 2ème année DSI - EMSI Casablanca
 
-📧 Email : hmirinsalma@gmail.com  
+📧 Email : hmirin.salma27@gmail.com  
 🔗 GitHub : [@hmirinsalma](https://github.com/hmirinsalma)
 
 ---

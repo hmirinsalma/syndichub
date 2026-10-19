@@ -72,18 +72,18 @@ Ce document vous guide pour configurer les labels, milestones et protections de 
 
 | Titre | Description | Date limite |
 |-------|-------------|-------------|
-| **Phase 0 - Initialisation** | Configuration du dépôt et documentation | 25/10/2026 |
-| **Phase 1 - Fondations** | Squelette backend et frontend | 05/11/2026 |
-| **Phase 2 - Base de données** | Modèle de données et migrations | 15/11/2026 |
-| **Phase 3 - Authentification** | JWT, rôles et isolation | 25/11/2026 |
-| **Phase 4 - Résidences** | Gestion résidences, lots, résidents | 05/12/2026 |
-| **Phase 5 - Paiements** | Appels de fonds et paiements | 20/12/2026 |
-| **Phase 6 - Documents PDF** | Génération reçus et relevés | 30/12/2026 |
-| **Phase 7 - Tickets** | Système de réclamations | 10/01/2027 |
-| **Phase 8 - Communication** | Annonces, dépenses, emails | 25/01/2027 |
-| **Phase 9 - Dashboard** | Tableaux de bord et audit | 05/02/2027 |
-| **Phase 10 - CI/CD** | Tests et déploiement | 20/02/2027 |
-| **Phase 11 - Release 1.0** | Finalisation et release | 28/02/2027 |
+| **Phase 0 - Initialisation** | Configuration du dépôt et documentation | 22/10/2026 |
+| **Phase 1 - Fondations** | Squelette backend et frontend | 27/10/2026 |
+| **Phase 2 - Base de données** | Modèle de données et migrations | 31/10/2026 |
+| **Phase 3 - Authentification** | JWT, rôles et isolation | 06/11/2026 |
+| **Phase 4 - Résidences** | Gestion résidences, lots, résidents | 12/11/2026 |
+| **Phase 5 - Paiements** | Appels de fonds et paiements | 22/11/2026 |
+| **Phase 6 - Documents PDF** | Génération reçus et relevés | 27/11/2026 |
+| **Phase 7 - Tickets** | Système de réclamations | 04/12/2026 |
+| **Phase 8 - Communication** | Annonces, dépenses, emails | 12/12/2026 |
+| **Phase 9 - Dashboard** | Tableaux de bord et audit | 18/12/2026 |
+| **Phase 10 - CI/CD** | Tests et déploiement | 30/12/2026 |
+| **Phase 11 - Release 1.0** | Finalisation et release | 06/01/2027 |
 
 **Note** : Les dates sont indicatives, adaptez-les selon votre planning réel.
 
