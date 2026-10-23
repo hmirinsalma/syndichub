@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/SyndicHub.API/SyndicHub.API.csproj" />
+    <Project Path="src/SyndicHub.Application/SyndicHub.Application.csproj" />
+    <Project Path="src/SyndicHub.Domain/SyndicHub.Domain.csproj" />
+    <Project Path="src/SyndicHub.Infrastructure/SyndicHub.Infrastructure.csproj" />
+    <Project Path="src/SyndicHub.Shared/SyndicHub.Shared.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  # SQL Server - Base de données
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: syndichub-sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=SyndicHub2026!
+      - MSSQL_PID=Developer
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqldata:/var/opt/mssql
+    networks:
+      - syndichub-network
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P SyndicHub2026! -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+
+  # MailHog - Serveur SMTP de test
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: syndichub-mailhog
+    ports:
+      - "1025:1025"  # SMTP
+      - "8025:8025"  # Interface web
+    networks:
+      - syndichub-network
+
+volumes:
+  sqldata:
+    driver: local
+
+networks:
+  syndichub-network:
+    driver: bridge
