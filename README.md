@@ -63,19 +63,72 @@ SyndicHub centralise toute la gestion dans une seule plateforme :
 
 ---
 
-## 🚀 Installation (à venir)
+## 🚀 Installation et lancement
 
-> Instructions détaillées disponibles après la Phase 1
+### Prérequis
+
+- **.NET SDK 8.0+** : [Télécharger ici](https://dotnet.microsoft.com/download)
+- **Node.js 18+** et npm : [Télécharger ici](https://nodejs.org/)
+- **Docker Desktop** : [Télécharger ici](https://www.docker.com/products/docker-desktop)
+
+### 1. Cloner le dépôt
+
+```bash
+git clone https://github.com/hmirinsalma/syndichub.git
+cd syndichub
+```
+
+### 2. Lancer SQL Server avec Docker
+
+```bash
+docker-compose up -d
+```
+
+Cela lance :
+- **SQL Server** sur le port `1433`
+- **MailHog** (emails de test) sur le port `8025`
+
+### 3. Lancer le backend (.NET API)
+
+```bash
+cd backend/src/SyndicHub.API
+dotnet run
+```
+
+L'API sera accessible sur **http://localhost:5050**  
+Documentation Swagger : **http://localhost:5050/swagger**
+
+### 4. Lancer le frontend (React)
+
+Dans un **nouveau terminal** :
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+L'application sera accessible sur **http://localhost:3000**
 
 ---
 
-## 📁 Structure du projet (en cours de développement)
+## 📁 Structure du projet
 
 ```
 syndichub/
-  ├── backend/           # API ASP.NET Core
-  ├── frontend/          # Application React
+  ├── backend/
+  │   └── src/
+  │       ├── SyndicHub.Domain/       # Entités et règles métier
+  │       ├── SyndicHub.Shared/       # Modèles partagés (ApiResponse)
+  │       ├── SyndicHub.Application/  # Cas d'usage et DTO
+  │       ├── SyndicHub.Infrastructure/  # EF Core, Identity, JWT
+  │       └── SyndicHub.API/          # Contrôleurs et configuration
+  ├── frontend/
+  │   └── src/
+  │       ├── App.tsx                 # Composant principal
+  │       └── main.tsx                # Point d'entrée
   ├── docs/              # Documentation et diagrammes
+  ├── .kiro/             # Configuration Kiro (steering, specs)
   └── docker-compose.yml # Orchestration Docker
 ```
 
@@ -91,15 +144,28 @@ syndichub/
 
 ## 🗺️ Roadmap
 
-### ✅ Phase 0 - Initialisation (en cours)
-- Configuration du dépôt GitHub
-- Documentation de base
+### ✅ Phase 0 - Initialisation
+- ✅ Configuration du dépôt GitHub
+- ✅ Création des labels (42) et milestones (12)
+- ✅ Protection de la branche `main`
+- ✅ Documentation de base
 
-### 🔲 Phase 1 - Fondations
-- Squelette backend et frontend
-- Configuration de base
+### ✅ Phase 1 - Fondations (EN COURS)
+- ✅ Structure backend Clean Architecture (5 projets)
+- ✅ Configuration Docker (SQL Server + MailHog)
+- ✅ Modèle de réponse API standard (`ApiResponse`, `PaginatedResult`)
+- ✅ Health endpoint (`/api/v1/health`)
+- ✅ Serilog, Swagger, CORS
+- ✅ Création du frontend React 18 + TypeScript + Vite
+- ✅ Configuration Tailwind CSS
+- ✅ Page de test avec connexion à l'API
 
-### 🔲 Phases 2-11
+### 🔲 Phase 2 - Authentification
+- Configuration ASP.NET Core Identity
+- JWT authentication
+- Routes d'authentification
+
+### 🔲 Phases 3-11
 - Voir [tasks.md](.kiro/specs/syndichub/tasks.md) pour le plan complet
 
 ---
