@@ -1,3 +1,4 @@
+using Microsoft.OpenApi.Models;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,13 +14,18 @@ builder.Host.UseSerilog();
 // Add services to the container
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
+builder.Services.AddSwaggerGen(options =>
 {
-    c.SwaggerDoc("v1", new() 
-    { 
-        Title = "SyndicHub API", 
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
         Version = "v1",
-        Description = "API de gestion de syndic de copropriété"
+        Title = "SyndicHub API",
+        Description = "API de gestion de syndic de copropriété",
+        Contact = new OpenApiContact
+        {
+            Name = "SyndicHub",
+            Email = "hmirin.salma27@gmail.com"
+        }
     });
 });
 
@@ -44,10 +50,9 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c =>
+    app.UseSwaggerUI(options =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "SyndicHub API v1");
-        c.RoutePrefix = "swagger";
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "SyndicHub API v1");
     });
 }
 
