@@ -9,6 +9,39 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [Non publié]
 
+### Phase 2 - Base de données (2026-10-26)
+
+#### Ajouté
+
+**Entités du domaine**
+- `User` : utilisateurs (ADMIN, SYNDIC, RESIDENT) avec rôles et résidence
+- `Residence` : copropriétés avec adresse, tantièmes totaux, solde de caisse
+- `Building` : immeubles dans une résidence avec nombre d'étages
+- `Unit` : lots (appartements, parkings, locaux) avec tantièmes, solde, résident
+
+**Entity Framework Core**
+- Installation EF Core 8.0.11 (SqlServer + Design)
+- `ApplicationDbContext` avec configuration Fluent API
+- Chaîne de connexion vers SQL Server Docker (localhost:1433)
+- Configuration des relations (1-N entre Residence-Building-Unit-User)
+- Index sur colonnes critiques (Email unique, ResidenceId, IsDeleted)
+- Valeurs par défaut SQL (GETUTCDATE pour CreatedAt, 0 pour Balance)
+- Suppression logique avec `IsDeleted`
+
+**Migration InitialCreate**
+- 5 tables créées : User, Residence, Building, Unit, __EFMigrationsHistory
+- Clés étrangères avec CASCADE et RESTRICT selon les règles métier
+- Index pour performance des requêtes
+
+#### Testé
+- ✅ Connexion à SQL Server Docker via SSMS
+- ✅ Base de données SyndicHub créée
+- ✅ Migration appliquée avec succès
+- ✅ Structure des tables vérifiée dans SSMS
+- ✅ Contraintes et relations correctes
+
+---
+
 ### Phase 1 - Fondations (2026-10-23)
 
 #### Ajouté
