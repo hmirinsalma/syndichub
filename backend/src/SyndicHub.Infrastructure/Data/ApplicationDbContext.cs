@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SyndicHub.Domain.Entities;
 
@@ -5,8 +7,9 @@ namespace SyndicHub.Infrastructure.Data;
 
 /// <summary>
 /// Contexte de base de données principal de l'application
+/// Hérite de IdentityDbContext pour intégrer ASP.NET Core Identity
 /// </summary>
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
@@ -14,7 +17,6 @@ public class ApplicationDbContext : DbContext
     }
 
     // DbSets (tables)
-    public DbSet<User> Users => Set<User>();
     public DbSet<Residence> Residences => Set<Residence>();
     public DbSet<Building> Buildings => Set<Building>();
     public DbSet<Unit> Units => Set<Unit>();
