@@ -13,13 +13,17 @@ public class Building
     
     public string? Description { get; set; }
     
-    public int FloorCount { get; set; }
+    public int FloorsCount { get; set; }
     
     public bool IsDeleted { get; set; } = false;
     
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     
+    public Guid CreatedBy { get; set; }
+    
     public DateTime? UpdatedAt { get; set; }
+    
+    public Guid? UpdatedBy { get; set; }
     
     // Navigation properties
     public Residence Residence { get; set; } = null!;

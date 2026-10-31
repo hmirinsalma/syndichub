@@ -164,11 +164,14 @@ namespace SyndicHub.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETUTCDATE()");
 
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Description")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<int>("FloorCount")
+                    b.Property<int>("FloorsCount")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
@@ -184,6 +187,9 @@ namespace SyndicHub.Infrastructure.Migrations
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -223,6 +229,10 @@ namespace SyndicHub.Infrastructure.Migrations
                         .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(0m);
 
+                    b.Property<string>("Email")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -231,10 +241,16 @@ namespace SyndicHub.Infrastructure.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("PostalCode")
-                        .IsRequired()
+                    b.Property<string>("Phone")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("PostalCode")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<Guid>("SyndicId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("TotalShares")
                         .HasColumnType("int");
@@ -242,9 +258,14 @@ namespace SyndicHub.Infrastructure.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("SyndicId");
 
                     b.ToTable("Residence", (string)null);
                 });
@@ -254,9 +275,6 @@ namespace SyndicHub.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("Area")
-                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal>("Balance")
                         .ValueGeneratedOnAdd()
@@ -271,16 +289,14 @@ namespace SyndicHub.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETUTCDATE()");
 
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Floor")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Number")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<Guid?>("ResidentId")
                         .HasColumnType("uniqueidentifier");
@@ -288,13 +304,23 @@ namespace SyndicHub.Infrastructure.Migrations
                     b.Property<int>("Shares")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("Surface")
+                        .HasColumnType("decimal(10,2)");
+
                     b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UnitNumber")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -475,6 +501,17 @@ namespace SyndicHub.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Residence");
+                });
+
+            modelBuilder.Entity("SyndicHub.Domain.Entities.Residence", b =>
+                {
+                    b.HasOne("SyndicHub.Domain.Entities.User", "Syndic")
+                        .WithMany()
+                        .HasForeignKey("SyndicId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Syndic");
                 });
 
             modelBuilder.Entity("SyndicHub.Domain.Entities.Unit", b =>

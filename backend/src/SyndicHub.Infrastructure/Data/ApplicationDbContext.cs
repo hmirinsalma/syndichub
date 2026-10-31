@@ -97,8 +97,13 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, 
                 .HasMaxLength(100);
 
             entity.Property(e => e.PostalCode)
-                .IsRequired()
                 .HasMaxLength(20);
+
+            entity.Property(e => e.Phone)
+                .HasMaxLength(20);
+
+            entity.Property(e => e.Email)
+                .HasMaxLength(100);
 
             entity.Property(e => e.CurrentBalance)
                 .HasColumnType("decimal(18,2)")
@@ -109,6 +114,12 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, 
 
             // Index
             entity.HasIndex(e => e.IsDeleted);
+
+            // Relation avec Syndic
+            entity.HasOne(e => e.Syndic)
+                .WithMany()
+                .HasForeignKey(e => e.SyndicId)
+                .OnDelete(DeleteBehavior.Restrict);
         });
     }
 
@@ -148,15 +159,15 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, 
             entity.ToTable("Unit");
             entity.HasKey(e => e.Id);
 
-            entity.Property(e => e.Number)
+            entity.Property(e => e.UnitNumber)
                 .IsRequired()
                 .HasMaxLength(50);
 
             entity.Property(e => e.Type)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasConversion<string>();
 
-            entity.Property(e => e.Area)
+            entity.Property(e => e.Surface)
                 .HasColumnType("decimal(10,2)");
 
             entity.Property(e => e.Balance)

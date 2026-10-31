@@ -13,7 +13,16 @@ public class Residence
     
     public string City { get; set; } = string.Empty;
     
-    public string PostalCode { get; set; } = string.Empty;
+    public string? PostalCode { get; set; }
+    
+    public string? Phone { get; set; }
+    
+    public string? Email { get; set; }
+    
+    /// <summary>
+    /// ID du syndic responsable de cette résidence
+    /// </summary>
+    public Guid SyndicId { get; set; }
     
     /// <summary>
     /// Nombre total de tantièmes de la résidence
@@ -33,7 +42,10 @@ public class Residence
     
     public DateTime? UpdatedAt { get; set; }
     
+    public Guid? UpdatedBy { get; set; }
+    
     // Navigation properties
+    public User Syndic { get; set; } = null!;
     public ICollection<Building> Buildings { get; set; } = new List<Building>();
     public ICollection<User> Users { get; set; } = new List<User>();
 }

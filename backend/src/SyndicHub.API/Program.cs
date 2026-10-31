@@ -69,6 +69,9 @@ builder.Services.AddAuthentication(options =>
 
 // Register application services
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IResidenceService, SyndicHub.Infrastructure.Services.ResidenceService>();
+builder.Services.AddScoped<IBuildingService, SyndicHub.Infrastructure.Services.BuildingService>();
+builder.Services.AddScoped<IUnitService, SyndicHub.Infrastructure.Services.UnitService>();
 
 // Add services to the container
 builder.Services.AddControllers();
